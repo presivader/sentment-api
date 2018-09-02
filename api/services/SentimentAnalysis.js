@@ -2,7 +2,7 @@ var Twitter = require('twitter');
 const _ = require('lodash');
 var sentiment = require('sentiment-ptbr');
 const cTable = require('console.table');
-
+const Promise = require('bluebird');
 var client = new Twitter(sails.config.twitterApi);
 
 
@@ -23,7 +23,7 @@ module.exports = {
         let analysis = sentiment(tweet.text, {
           '#OBrasilFelizdeNovo': 5,
         });
-        tweetsArray.push([tweet.text, tweet.user.location, tweet.retweet_count, analysis.score]);
+        tweetsArray.push([tag, tweet.text, tweet.user.location, tweet.retweet_count, analysis.score]);
 
         Sentment.create({
           tag: tag,
@@ -35,7 +35,7 @@ module.exports = {
 
       });
 
-      console.table(['Tweet', 'Local', 'Retweets', 'Score'], tweetsArray);
+      console.table(['Tag', 'Tweet', 'Local', 'Retweets', 'Score'], tweetsArray);
 
       return Promise.resolve(tweetsArray);
     });

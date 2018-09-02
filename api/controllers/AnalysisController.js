@@ -15,7 +15,7 @@ module.exports = {
 		try {
 			let response = await SentimentAnalysis.getAnalysisData(tag);
 
-			return res.ok(response);
+			return res.ok(`Ok, processando a tag ${tag}`);
 
 		} catch(err) {
 			return res.badRequest(err);
