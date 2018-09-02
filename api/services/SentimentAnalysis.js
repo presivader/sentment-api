@@ -26,6 +26,7 @@ module.exports = {
         tweetsArray.push([tweet.text, tweet.user.location, tweet.retweet_count, analysis.score]);
 
         Sentment.create({
+          tag: tag,
           text: tweet.text,
           location: tweet.user.location,
           retweet_count: tweet.retweet_count,
